@@ -1,5 +1,15 @@
-FROM python:3.10-slim
+# 1. Dùng image Python nhẹ
+FROM python:3.9-slim
+
+# 2. Đặt thư mục làm việc trong container
 WORKDIR /app
-COPY . /app
-RUN pip install flask
+
+# 3. Copy và cài thư viện
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+# 4. Copy toàn bộ code vào container
+COPY . .
+
+# 5. Lệnh chạy app khi container khởi động
 CMD ["python", "app.py"]
